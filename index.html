@@ -2,122 +2,44 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulario de Preguntas</title>
+  <title>Formulario Bonito</title>
   <style>
     body {
-      font-family: "Segoe UI", sans-serif;
-      background: #f9fafb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
       display: flex;
-      align-items: center;
       justify-content: center;
-      height: 100vh;
-      margin: 0;
+      padding: 40px;
     }
-
     .form-container {
       background: white;
-      padding: 2rem;
+      padding: 20px 40px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      max-width: 700px;
       width: 100%;
-      max-width: 500px;
     }
-
-    h2 {
-      margin-top: 0;
+    h1 {
+      text-align: center;
       color: #333;
+      margin-bottom: 24px;
     }
-
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-    input, textarea {
+    iframe {
       width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-
-    button {
-      width: 100%;
-      padding: 0.75rem;
-      background: #6366f1;
-      color: white;
+      height: 800px;
       border: none;
       border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: #4f46e5;
-    }
-
-    #estado {
-      margin-top: 1rem;
-      font-weight: bold;
-      text-align: center;
     }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <h2>Envíanos tu pregunta</h2>
-    <form id="formulario">
-      <label for="nombre">Tu nombre</label>
-      <input type="text" id="nombre" name="nombre" placeholder="Ej: Marta" required />
-
-      <label for="pregunta">Pregunta</label>
-      <input type="text" id="pregunta" name="pregunta" placeholder="¿Cuál es el significado de la vida?" required />
-
-      <label for="respuesta">Respuesta</label>
-      <textarea id="respuesta" name="respuesta" rows="4" placeholder="Tu respuesta..." required></textarea>
-
-      <button type="submit">Enviar</button>
-      <p id="estado"></p>
-    </form>
+    <h1>Contáctanos</h1>
+    <iframe src="https://forms.gle/4GbVjxnZmzZrk6qH6" 
+            allowfullscreen
+            loading="lazy">
+      Cargando…
+    </iframe>
   </div>
-
-  <script>
-    const form = document.getElementById("formulario");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const data = {
-        nombre: form.nombre.value.trim(),
-        pregunta: form.pregunta.value.trim(),
-        respuesta: form.respuesta.value.trim()
-      };
-
-      const response = await fetch("https://script.google.com/macros/s/AKfycbzjExykEP2_cRVLpAReJ7RCvF2dIDWnipWc5Nm8dSkN71fwIf2jCXGEY-GzD4kN2ACK/exec", {
-        method: "POST",
-        mode: "no-cors",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-
-      const estado = document.getElementById("estado");
-
-      if (response.ok) {
-        form.reset();
-        estado.textContent = "¡Gracias por tu envío!";
-        estado.style.color = "green";
-      } else {
-        estado.textContent = "Error al enviar. Inténtalo más tarde.";
-        estado.style.color = "red";
-      }
-    });
-  </script>
 </body>
 </html>
-
